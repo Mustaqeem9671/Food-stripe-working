@@ -63,20 +63,6 @@ await db.collection("products").doc(`/${productId}/`).delete().then(result => {
 });
 
 
-//delete a user 
-// router.delete("/delete/:userId", async (req, res) => {
-//   const userId = req.params.userId;
-//   try {
-// await db.collection("users").doc(`/${userId}/`).delete().then(result => {
-//   return res.status(200).send({ success: true, data: result });
-
-// });
-//   } catch (err) {
-//     return res.send({ success: false, msg: `error :${err}` });
-
-//   }
-// });
-
 //create a cart
 router.post("/addToCart/:userId", async (req, res) => {
   const userId = req.params.userId;

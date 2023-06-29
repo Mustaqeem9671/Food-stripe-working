@@ -1,7 +1,3 @@
-
-
-
-
 const express = require("express");
 const router = express.Router();
 const admin = require("firebase-admin");
@@ -74,13 +70,10 @@ router.get("/all", async (req, res) => {
 router.delete("/delete/:userId", async (req, res) => {
   const userId = req.params.userId;
   try {
-await db.collection("users").doc(`/${userId}/`).delete().then(result => {
-  return res.status(200).send({ success: true, data: result });
-
-});
+    await admin.auth().deleteUser(userId);
+    return res.status(200).send({ success: true, message: 'User deleted successfully' });
   } catch (err) {
-    return res.send({ success: false, msg: `error :${err}` });
-
+    return res.status(500).send({ success: false, error: err.message });
   }
 });
 

@@ -112,29 +112,8 @@ export const getAllOrder = async () => {
     const res = await axios.get(
       `${baseUrl}/api/products/orders`
     );
-<<<<<<< HEAD
-    console.log(res);
-=======
-    // console.log(res.data);
->>>>>>> 59db177d9b35eb58ce11e2cb9e99c88ddac569ba
     return res.data.data;
   } catch (err) {
     return null;
   }
-<<<<<<< HEAD
-=======
-};
-
-//update the order status
-export const updateOrderSts = async (order_id, sts) => {
-  try {
-    const res = await axios.get(`${baseUrl}/api/products/updateOrder/${order_id}`,
-    null, { params: { sts: sts} }
-    );
-    return res.data.data;
-
-  } catch (err) {
-    return null
-  }
->>>>>>> 59db177d9b35eb58ce11e2cb9e99c88ddac569ba
 };

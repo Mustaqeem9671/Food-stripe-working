@@ -22,24 +22,5 @@ export { default as Cart } from "./Cart";
 export { default as CheckOutSuccess } from "./CheckOutSuccess";
 export { default as Services } from "./Services";
 export { default as OrderData } from "./OrderData";
-<<<<<<< HEAD
-=======
+
 export { default as UsersOrder } from "./UsersOrder";
-
->>>>>>> 59db177d9b35eb58ce11e2cb9e99c88ddac569ba
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
