@@ -231,15 +231,21 @@ router.post("/create-checkout-success", async (req, res) => {
 });
 
 
-const endpointSecret = "whsec_c88a63846515a544de1654de990ab486d3664610be8e65a5b3acf6e509b6c3fc";
-
+///
+let endpointSecret;
+// const endpointSecret = "whsec_c88a63846515a544de1654de990ab486d3664610be8e65a5b3acf6e509b6c3fc"
 router.post('/webhook', express.raw({ type: 'application/json' }), async (req, res) => {
-  const sigHeader = req.headers['stripe-signature'];
+  const sig = req.headers['stripe-signature'];
 
   try {
-    const event = stripe.webhooks.constructEvent(req.body, sigHeader, endpointSecret);
+    let event;
 
-    // Handle the event
+    if (endpointSecret) {
+      event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
+    } else {
+      event = req.body;
+    }
+
     if (event.type === 'checkout.session.completed') {
       const session = event.data.object;
 
@@ -253,6 +259,32 @@ router.post('/webhook', express.raw({ type: 'application/json' }), async (req, r
     res.status(400).send(`Webhook Error: ${error.message}`);
   }
 });
+
+
+// const endpointSecret = "whsec_c88a63846515a544de1654de990ab486d3664610be8e65a5b3acf6e509b6c3fc";
+
+// router.post('/webhook', express.raw({ type: 'application/json' }), async (req, res) => {
+//   const sigHeader = req.headers['stripe-signature'];
+
+//   try {
+//     const event = stripe.webhooks.constructEvent(req.body, sigHeader, endpointSecret);
+
+//     // Handle the event
+//     if (event.type === 'checkout.session.completed') {
+//       const session = event.data.object;
+
+//       const customer = await stripe.customers.retrieve(session.customer);
+//       await createOrder(customer, session, res);
+//     }
+
+//     res.status(200).send();
+//   } catch (error) {
+//     console.error(error);
+//     res.status(400).send(`Webhook Error: ${error.message}`);
+//   }
+// });
+
+
 // create a order
 const createOrder = async (customer, intent, res) => {
   try {
@@ -322,6 +354,20 @@ router.get("/orders", async (req, res) => {
       return res.send({ success: false, msg: `error :${err}` });
     }
   })();
+});
+
+//update the order status
+router.post("/updateOrder/:order_id", async (req, res) => {
+  const order_id = req.params.order_id;
+  const sts = req.query.sts;
+
+  try {
+    const updatedItem = await db.collection("orders").doc(`/${order_id}/`).update({ sts });
+    return res.status(200).send({ success: true, data: updatedItem });
+
+  } catch (err) {
+    return res.send({ success: false, msg: `Error :,${err}` });
+  }
 });
 
 module.exports = router;  

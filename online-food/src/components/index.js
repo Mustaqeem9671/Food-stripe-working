@@ -24,3 +24,15 @@ export { default as Services } from "./Services";
 export { default as OrderData } from "./OrderData";
 
 export { default as UsersOrder } from "./UsersOrder";
+export { default as Footer } from "./Footer";
+export { default as AsAbout } from "./AsAbout";
+
+export { default as Foooter } from "./Foooter.css";
+export { default as AboooutAs } from "./Abooout.css";
+
+
+
+
+
+
+

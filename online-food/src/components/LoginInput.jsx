@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
 const LoginInput = ({placeHolder, icons, inputState, inputStateFunc, type, isSignUp}) => {
  

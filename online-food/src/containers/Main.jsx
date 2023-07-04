@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { FilterSection, Header, Home, HomeSlider } from '../components';
+import { FilterSection, Footer, Header, Home, HomeSlider } from '../components';
 import  Cart  from "../components/Cart";
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllProducts } from '../api';
@@ -27,6 +27,7 @@ const Main = () => {
         <Home />
         <HomeSlider />
         <FilterSection />
+        <Footer />
       </div>
 
       {isCart && <Cart />}

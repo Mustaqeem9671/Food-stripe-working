@@ -9,10 +9,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUserDetails } from "./context/actions/userActions";
 import { motion } from "framer-motion";
 import { fadeInOut } from "./Animations";
-import { MainLoader, UsersOrder } from "./components";
-import { Alert } from "./components";
+import { Alert, MainLoader, UsersOrder, CheckOutSuccess } from "./components";
+// import { Alert } from "./components";
 import { setCartItems } from "./context/actions/cartActions";
-import { CheckOutSuccess } from "./components";
+// import { CheckOutSuccess } from "./components";
 
 const App = () => {
   const firebaseAuth = getAuth(app);

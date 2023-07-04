@@ -11,23 +11,27 @@ const DBOrders = () => {
   useEffect(() => {
     if (!orders) {
       getAllOrder().then((data) => {
-        console.log(data)
+        // console.log(data)
         dispatch(setOrders(data));
       });
     }
   }, []);
 
   return (
-    <div className="flex items-center justify-center flex-col pt-6 w-full gap-4" >
+    <div className="flex items-center justify-center flex-col pt-6 w-full gap-4">
       {orders ? (
-      <>{orders.toString()}</>
+        <>
+          {orders.map((item, i) => (
+            <OrderData key={i} index={i} data={item} admin={true} />
+          ))}
+        </>
       ) : (
-      <>
-      <h1 className="text-[72px] text-headingColor font-bold" >No Data</h1>
-      </>
+        <>
+          <h1 className="text-[72px] text-headingColor font-bold">No Data</h1>
+        </>
       )}
-      </div>
-  )
+    </div>
+  );
 };
 
 export default DBOrders;

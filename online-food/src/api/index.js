@@ -56,15 +56,15 @@ export const getAllUsers = async () => {
   }
 };
 
-//delete a user from the database
-// export const deleteAUser = async (userId) => {
-//   try {
-//     const res = await axios.delete(`${baseUrl}/api/products/delete/${userId}`);
-//     return res.data.data;
-//   } catch (err) {
-//     return null;
-//   }
-// };
+export const deleteAUser = async (userId) => {
+  try {
+    const res = await axios.delete(`${baseUrl}/api/users/delete/${userId}`);
+    return res.data.data;
+  } catch (err) {
+    return null;
+  }
+};
+
 //add an items to the cart
 //add new items to the cart
 export const addNewItemToCart = async (user_id, data) => {
@@ -111,6 +111,18 @@ export const getAllOrder = async () => {
   try {
     const res = await axios.get(
       `${baseUrl}/api/products/orders`
+    );
+    return res.data.data;
+  } catch (err) {
+    return null;
+  }
+};
+
+//update the order status
+export const updateOrderSts = async (order_id, sts) => {
+  try {
+    const res = await axios.post(
+      `${baseUrl}/api/products/updateOrder/${order_id}`, null, { params: { sts: sts } }
     );
     return res.data.data;
   } catch (err) {

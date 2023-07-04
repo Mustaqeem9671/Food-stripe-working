@@ -11,7 +11,11 @@ import { getAuth } from "firebase/auth";
 import { app } from "../config/firebase.config";
 import { setUserNull } from "../context/actions/userActions";
 import { setCartOn } from "../context/actions/displayCartAction";
-import Services from "./Services";
+import AsAbout from "./AsAbout";
+
+
+
+
 
 
 const Header = () => {
@@ -67,8 +71,8 @@ const Header = () => {
             }
             to={"/services"}
           >
+           
             Services
-            {/* <Services /> */}
           </NavLink>
           <NavLink
             className={({ isActive }) =>
@@ -76,7 +80,9 @@ const Header = () => {
             }
             to={"/aboutus"}
           >
-            About Us
+          {/* <AsAbout /> */}
+          About As
+      
           </NavLink>
         </ul>
         <motion.div {...buttonClick} 
@@ -116,7 +122,8 @@ const Header = () => {
                   className=" px-6 py-4 w-48 bg-cardOverlay backdrop-blur-md 
                           rounded-md shadow-md absolute top-12 right-0 flex flex-col gap-4"
                 >
-                  {user?.user_id === process.env.REACT_APP_AADMIN_ID && (
+                  
+                    {user?.user_id === process.env.REACT_APP_ADMIN_ID && (
 
                   <Link
                     className="h hover:text-red-500 text-xl text-textColor"
@@ -124,7 +131,8 @@ const Header = () => {
                   >
                     Dashboard
                   </Link>
-                  )}
+                    )}
+                  
 
                   <Link
                     className="h hover:text-red-500 text-xl text-textColor"

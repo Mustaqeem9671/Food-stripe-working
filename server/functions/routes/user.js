@@ -67,15 +67,22 @@ router.get("/all", async (req, res) => {
 });
 
 //delete a user from the 
+
+
+
 router.delete("/delete/:userId", async (req, res) => {
   const userId = req.params.userId;
   try {
-    await admin.auth().deleteUser(userId);
-    return res.status(200).send({ success: true, message: 'User deleted successfully' });
+await db.collection("users").doc(`/${userId}/`).delete().then(result => {
+  return res.status(200).send({ success: true, data: result });
+
+});
   } catch (err) {
-    return res.status(500).send({ success: false, error: err.message });
+    return res.send({ success: false, msg: `error :${err}` });
+
   }
 });
+
 
 module.exports = router;
 

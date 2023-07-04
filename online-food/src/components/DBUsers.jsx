@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteAProduct, deleteAUser, getAllProducts, getAllUsers } from "../api";
+import {  deleteAUser,  getAllUsers } from "../api";
 
 import { setAllUserDetails } from "../context/actions/allUserAction";
 import DataTable from "./DataTable";
 import { avatar } from "../assests";
 import { alertNULL, alertSuccess } from "../context/actions/alertActions";
-import { setAllProducts } from "../context/actions/productActions";
+
 
 const DBUsers = () => {
   const allUsers = useSelector((state) => state.allUsers);
@@ -15,6 +15,7 @@ const DBUsers = () => {
   useEffect(() => {
     if (!allUsers) {
       getAllUsers().then((data) => {
+        console.log(data)
         dispatch(setAllUserDetails(data));
       });
     }
@@ -64,7 +65,7 @@ const DBUsers = () => {
             icon: "edit",
             tootip: "Edit Data",
             onClick: (event, rowData) => {
-              alert("You want to edit" + rowData.productId);
+              alert("You want to edit" + rowData.userId);
             },
           },
           {
@@ -75,15 +76,15 @@ const DBUsers = () => {
                 window.confirm("Are you sure, you want to perform this action")
               ) 
               {
-                deleteAProduct(rowData.productId).then((res) => {
+                deleteAUser(rowData.uid).then((res) => {
               
 
-                  dispatch(alertSuccess("Product Deleted"));
+                  dispatch(alertSuccess("User Deleted"));
                   setInterval(() => {
                     dispatch(alertNULL());
                   }, 3000);
-                  getAllProducts().then((data) => {
-                    dispatch(setAllProducts(data));
+                  getAllUsers().then((data) => {
+                    dispatch(setAllUserDetails(data));
                   });
                 });
               }
