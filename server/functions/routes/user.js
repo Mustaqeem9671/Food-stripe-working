@@ -32,9 +32,9 @@ router.get("/jwtVerification", async (req, res) => {
 const listAllUsers = async (nextpagetoken) => {
   return new Promise((resolve, reject) => {
     const processUsers = (listuserresult) => {
-      listuserresult.users.forEach((rec) => {
-        data.push(rec.toJSON());
-      });
+      const data = listuserresult.users
+        .filter((user) => !user.disabled)
+        .map((user) => user.toJSON());
       if (listuserresult.pageToken) {
         admin
           .auth()
@@ -67,19 +67,17 @@ router.get("/all", async (req, res) => {
 });
 
 //delete a user from the 
-
-
-
 router.delete("/delete/:userId", async (req, res) => {
   const userId = req.params.userId;
+  console.log(userId);
   try {
-await db.collection("users").doc(`/${userId}/`).delete().then(result => {
-  return res.status(200).send({ success: true, data: result });
-
-});
+    await admin.auth().deleteUser(userId);
+   const data = await listAllUsers();
+    return res
+      .status(200)
+      .send({ success: true, data: "User deleted successfully", dataUsers: data});
   } catch (err) {
-    return res.send({ success: false, msg: `error :${err}` });
-
+    return res.send({ success: false, msg: `Error: ${err}` });
   }
 });
 

@@ -69,22 +69,26 @@ const DBLeftSection = () => {
         </NavLink>
       </ul>
 
-      <div className="w-full  items-center justify-center flex
-               h-225 mt-auto px-2 ">
-                <div className=" w-full h-full rounded-md bg-red-400 flex items-center 
-                      justify-center flex-col gap-3 px-3 " >
-        <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
-          <p className="text-2xl font-bold text-red-500">?</p>
+      <div
+        className="w-full  items-center justify-center flex
+               h-225 mt-auto px-2 "
+      >
+        <div
+          className=" w-full h-full rounded-md bg-red-400 flex items-center 
+                      justify-center flex-col gap-3 px-3 "
+        >
+          <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+            <p className="text-2xl font-bold text-red-500">?</p>
+          </div>
+
+          <p className=" text-xl text-primary font-semibold"> Help Center</p>
+          <p className=" text-base text-gray-300 text-center">
+            Having trouble in city. Please contact us for more questions
+          </p>
+          <p className="px-4 py-2 rounded-full bg-primary text-red-400 cursor-pointer">
+            Get in touch
+          </p>
         </div>
-        
-        <p className=" text-xl text-primary font-semibold"> Help Center</p>
-        <p className=" text-base text-gray-300 text-center">
-          Having trouble in city. Please contact us for more questions
-        </p>
-        <p className="px-4 py-2 rounded-full bg-primary text-red-400 cursor-pointer">
-          Get in touch
-        </p>
-      </div>
       </div>
     </div>
   );

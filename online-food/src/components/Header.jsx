@@ -13,11 +13,6 @@ import { setUserNull } from "../context/actions/userActions";
 import { setCartOn } from "../context/actions/displayCartAction";
 import AsAbout from "./AsAbout";
 
-
-
-
-
-
 const Header = () => {
   const user = useSelector((state) => state.user);
   const cart = useSelector((state) => state.cart);
@@ -71,7 +66,6 @@ const Header = () => {
             }
             to={"/services"}
           >
-           
             Services
           </NavLink>
           <NavLink
@@ -80,21 +74,22 @@ const Header = () => {
             }
             to={"/aboutus"}
           >
-          {/* <AsAbout /> */}
-          About As
-      
+            About As
           </NavLink>
         </ul>
-        <motion.div {...buttonClick} 
-        onClick={handleCartClick}
-        // onClick={() => dispatch(setCartOn)}
-         className="relative cursor-pointer">
+        <motion.div
+          {...buttonClick}
+          onClick={handleCartClick}
+          // onClick={() => dispatch(setCartOn)}
+          className="relative cursor-pointer"
+        >
           <BsFillCartDashFill className=" text-3xl text-textColor " />
           {cart?.length > 0 && (
-          <div className="w-6 h-6 rounded-full bg-red-500 flex items-center justify-center absolute -top-4 -right-1">
-            <p className="text-primary text-base font-semibold">{cart?.length}
-            </p>
-          </div>
+            <div className="w-6 h-6 rounded-full bg-red-500 flex items-center justify-center absolute -top-4 -right-1">
+              <p className="text-primary text-base font-semibold">
+                {cart?.length}
+              </p>
+            </div>
           )}
         </motion.div>
 
@@ -122,28 +117,18 @@ const Header = () => {
                   className=" px-6 py-4 w-48 bg-cardOverlay backdrop-blur-md 
                           rounded-md shadow-md absolute top-12 right-0 flex flex-col gap-4"
                 >
-                  
-                    {user?.user_id === process.env.REACT_APP_ADMIN_ID && (
+                  {user?.user_id === process.env.REACT_APP_ADMIN_ID && (
+                    <Link
+                      className="h hover:text-red-500 text-xl text-textColor"
+                      to={"/dashboard/home"}
+                    >
+                      Dashboard
+                    </Link>
+                  )}
 
                   <Link
                     className="h hover:text-red-500 text-xl text-textColor"
-                    to={"/dashboard/home"}
-                  >
-                    Dashboard
-                  </Link>
-                    )}
-                  
-
-                  <Link
-                    className="h hover:text-red-500 text-xl text-textColor"
-                    to={"/dashboard/home"}
-                  >
-                    My Profile
-                  </Link>
-
-                  <Link
-                    className="h hover:text-red-500 text-xl text-textColor"
-                    to={"/dashboard/home"}
+                    to={"/user-orders"}
                   >
                     Orders
                   </Link>

@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {  deleteAUser,  getAllUsers } from "../api";
+import { deleteAUser, getAllUsers } from "../api";
 
 import { setAllUserDetails } from "../context/actions/allUserAction";
 import DataTable from "./DataTable";
 import { avatar } from "../assests";
-import { alertNULL, alertSuccess } from "../context/actions/alertActions";
-
+import { alertNULL, alertSuccess,alertWarning } from "../context/actions/alertActions";
 
 const DBUsers = () => {
   const allUsers = useSelector((state) => state.allUsers);
@@ -15,7 +14,7 @@ const DBUsers = () => {
   useEffect(() => {
     if (!allUsers) {
       getAllUsers().then((data) => {
-        console.log(data)
+        console.log(data);
         dispatch(setAllUserDetails(data));
       });
     }
@@ -65,7 +64,7 @@ const DBUsers = () => {
             icon: "edit",
             tootip: "Edit Data",
             onClick: (event, rowData) => {
-              alert("You want to edit" + rowData.userId);
+              alert("You want to edit " + rowData.uid);
             },
           },
           {
@@ -74,21 +73,19 @@ const DBUsers = () => {
             onClick: (event, rowData) => {
               if (
                 window.confirm("Are you sure, you want to perform this action")
-              ) 
-              {
+              ) {
                 deleteAUser(rowData.uid).then((res) => {
-              
-
                   dispatch(alertSuccess("User Deleted"));
                   setInterval(() => {
                     dispatch(alertNULL());
                   }, 3000);
-                  getAllUsers().then((data) => {
-                    dispatch(setAllUserDetails(data));
-                  });
+                  if (res.data.success) {
+                    dispatch(setAllUserDetails(res.data.dataUsers));
+                  } else {
+                    dispatch(alertWarning(res.data.msg));
+                  }
                 });
               }
-             
             },
           },
         ]}

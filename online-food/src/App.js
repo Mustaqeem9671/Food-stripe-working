@@ -12,7 +12,9 @@ import { fadeInOut } from "./Animations";
 import { Alert, MainLoader, UsersOrder, CheckOutSuccess } from "./components";
 // import { Alert } from "./components";
 import { setCartItems } from "./context/actions/cartActions";
+import AsAbout from "./components/AsAbout";
 // import { CheckOutSuccess } from "./components";
+import { Footer, Header } from "./components";
 
 const App = () => {
   const firebaseAuth = getAuth(app);
@@ -46,22 +48,34 @@ const alert = useSelector((state) => state.alert);
 
   return (
     <div className="w-screen min-h-screen h-screen flex items-center justify-center overflow-x-hidden">
-     {isloading && (
-      <motion.div {...fadeInOut} className="fixed inset-0 z-50 bg-cardOverlay backdrop-blur-md flex items-center justify-center w-full">
-        <MainLoader/>
-      </motion.div>
-     )}
-     
+      {isloading && (
+        <motion.div
+          {...fadeInOut}
+          className="fixed inset-0 z-50 bg-cardOverlay backdrop-blur-md flex items-center justify-center w-full"
+        >
+          <MainLoader />
+        </motion.div>
+      )}
+
       <Routes>
-      
         <Route path="/*" element={<Main />} />
         <Route path="/login" element={<Login />} />
+        <Route
+          path="/aboutus"
+          element={
+            <div className="flex flex-col">
+              <Header />
+              <AsAbout />
+              <Footer />
+            </div>
+          }
+        />
         <Route path="/dashboard/*" element={<Dashboard />} />
         <Route path="/checkout-success" element={<CheckOutSuccess />} />
         <Route path="/user-orders" element={<UsersOrder />} />
       </Routes>
 
-    {alert?.type && <Alert type={alert?.type} message={alert?.message} />}
+      {alert?.type && <Alert type={alert?.type} message={alert?.message} />}
     </div>
   );
 };

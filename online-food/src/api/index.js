@@ -59,7 +59,7 @@ export const getAllUsers = async () => {
 export const deleteAUser = async (userId) => {
   try {
     const res = await axios.delete(`${baseUrl}/api/users/delete/${userId}`);
-    return res.data.data;
+    return res;
   } catch (err) {
     return null;
   }
